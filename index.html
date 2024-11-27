@@ -1,133 +1,166 @@
-<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Calculadora</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background-color: #f3f3f3;
-      margin: 0;
-    }
+    <!-- Define la codificación de caracteres como UTF-8 para que los caracteres especiales se muestren correctamente -->
+    <meta charset="UTF-8">
+    <!-- Hace que la página sea responsiva en dispositivos móviles -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Título de la página que aparece en la pestaña del navegador -->
+    <title>Calculadora</title>
+    <!-- Aquí va el bloque de estilos CSS -->
+    <style>
+        /* Estilos globales para el cuerpo de la página */
+        body {
+            font-family: Arial, sans-serif; /* Establece la fuente del texto */
+            display: flex; /* Usamos flexbox para centrar la calculadora */
+            justify-content: center; /* Centra horizontalmente */
+            align-items: center; /* Centra verticalmente */
+            height: 100vh; /* La altura de la página será el 100% de la ventana del navegador */
+            margin: 0; /* Elimina los márgenes por defecto del body */
+            background-color: #f4f4f9; /* Establece el color de fondo de la página */
+        }
 
-    .calculadora {
-      background-color: #fff;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-      width: 300px;
-    }
+        /* Estilo del contenedor de la calculadora */
+        .calculator {
+            background-color: white; /* Fondo blanco para la calculadora */
+            padding: 20px; /* Espaciado interno de 20px */
+            border-radius: 10px; /* Bordes redondeados */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil alrededor */
+        }
 
-    .pantalla {
-      width: 100%;
-      height: 50px;
-      margin-bottom: 20px;
-      font-size: 1.5em;
-      text-align: right;
-      padding: 10px;
-      border: 2px solid #ccc;
-      border-radius: 5px;
-    }
+        /* Estilo de la caja de texto que muestra los resultados */
+        .calculator input {
+            width: 200px; /* Ancho de la caja de texto */
+            height: 50px; /* Altura de la caja de texto */
+            font-size: 24px; /* Tamaño de la fuente dentro de la caja de texto */
+            text-align: right; /* Alinea el texto a la derecha */
+            margin-bottom: 10px; /* Espacio inferior */
+            padding: 10px; /* Espaciado dentro de la caja de texto */
+            border: 1px solid #ddd; /* Borde gris claro */
+            border-radius: 5px; /* Bordes redondeados */
+        }
 
-    .botones {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-    }
+        /* Estilo de los botones de la calculadora */
+        .calculator button {
+            width: 45px; /* Ancho de cada botón */
+            height: 45px; /* Altura de cada botón */
+            font-size: 20px; /* Tamaño de la fuente en los botones */
+            margin: 5px; /* Espaciado entre los botones */
+            border: none; /* Sin borde alrededor del botón */
+            background-color: #f1f1f1; /* Color de fondo por defecto */
+            border-radius: 5px; /* Bordes redondeados */
+            cursor: pointer; /* El cursor cambia a una mano al pasar sobre el botón */
+            transition: background-color 0.3s; /* Transición suave para el cambio de color de fondo */
+        }
 
-    .boton {
-      padding: 15px;
-      font-size: 1.2em;
-      text-align: center;
-      border: none;
-      border-radius: 5px;
-      background-color: #007bff;
-      color: white;
-      cursor: pointer;
-      transition: background-color 0.2s;
-    }
+        /* Efecto al pasar el ratón sobre los botones */
+        .calculator button:hover {
+            background-color: #ddd; /* Fondo gris al pasar el ratón */
+        }
 
-    .boton:hover {
-      background-color: #0056b3;
-    }
+        /* Efecto cuando se hace clic en un botón */
+        .calculator button:active {
+            background-color: #ccc; /* Fondo más oscuro cuando se hace clic */
+        }
 
-    .boton-operador {
-      background-color: #28a745;
-    }
+        /* Estilo para los botones de los operadores */
+        .calculator .operator {
+            background-color: #ff9800; /* Fondo naranja para los operadores */
+            color: white; /* Texto en blanco */
+        }
 
-    .boton-operador:hover {
-      background-color: #1e7e34;
-    }
+        /* Estilo para el botón de igual */
+        .calculator .equals {
+            background-color: #4caf50; /* Fondo verde para el botón de igual */
+            color: white; /* Texto en blanco */
+        }
 
-    .boton-clear {
-      background-color: #dc3545;
-    }
-
-    .boton-clear:hover {
-      background-color: #a71d2a;
-    }
-  </style>
+        /* Estilo para el botón de limpiar (C) */
+        .calculator .clear {
+            background-color: #f44336; /* Fondo rojo para el botón de limpiar */
+            color: white; /* Texto en blanco */
+        }
+    </style>
 </head>
 <body>
-  <div class="calculadora">
-    <input type="text" class="pantalla" id="pantalla" readonly>
-    <div class="botones">
-      <button class="boton" onclick="agregarNumero('7')">7</button>
-      <button class="boton" onclick="agregarNumero('8')">8</button>
-      <button class="boton" onclick="agregarNumero('9')">9</button>
-      <button class="boton boton-operador" onclick="agregarOperador('/')">/</button>
 
-      <button class="boton" onclick="agregarNumero('4')">4</button>
-      <button class="boton" onclick="agregarNumero('5')">5</button>
-      <button class="boton" onclick="agregarNumero('6')">6</button>
-      <button class="boton boton-operador" onclick="agregarOperador('*')">x</button>
+    <!-- Contenedor principal de la calculadora -->
+    <div class="calculator">
+        <!-- Campo de texto que muestra la operación actual y el resultado -->
+        <input type="text" id="display" disabled />
+        
+        <!-- Fila de botones (1) -->
+        <div>
+            <button onclick="appendNumber('7')">7</button>
+            <button onclick="appendNumber('8')">8</button>
+            <button onclick="appendNumber('9')">9</button>
+            <button onclick="appendOperator('+')" class="operator">+</button>
+        </div>
+        
+        <!-- Fila de botones (2) -->
+        <div>
+            <button onclick="appendNumber('4')">4</button>
+            <button onclick="appendNumber('5')">5</button>
+            <button onclick="appendNumber('6')">6</button>
+            <button onclick="appendOperator('-')" class="operator">-</button>
+        </div>
 
-      <button class="boton" onclick="agregarNumero('1')">1</button>
-      <button class="boton" onclick="agregarNumero('2')">2</button>
-      <button class="boton" onclick="agregarNumero('3')">3</button>
-      <button class="boton boton-operador" onclick="agregarOperador('-')">-</button>
+        <!-- Fila de botones (3) -->
+        <div>
+            <button onclick="appendNumber('1')">1</button>
+            <button onclick="appendNumber('2')">2</button>
+            <button onclick="appendNumber('3')">3</button>
+            <button onclick="appendOperator('*')" class="operator">*</button>
+        </div>
 
-      <button class="boton" onclick="agregarNumero('0')">0</button>
-      <button class="boton" onclick="agregarNumero('.')">.</button>
-      <button class="boton boton-clear" onclick="limpiarPantalla()">C</button>
-      <button class="boton boton-operador" onclick="agregarOperador('+')">+</button>
-
-      <button class="boton boton-operador" style="grid-column: span 4;" onclick="calcular()">=</button>
+        <!-- Fila de botones (4) -->
+        <div>
+            <button onclick="appendNumber('0')">0</button>
+            <button onclick="clearDisplay()" class="clear">C</button>
+            <button onclick="calculate()" class="equals">=</button>
+            <button onclick="appendOperator('/')" class="operator">/</button>
+        </div>
     </div>
-  </div>
 
-  <script>
-    const pantalla = document.getElementById('pantalla');
+    <!-- Aquí va el bloque de código JavaScript -->
+    <script>
+        // Obtener el campo de texto donde se muestra la operación y el resultado
+        let display = document.getElementById('display');
+        // Variable para almacenar la expresión matemática actual
+        let currentInput = '';
 
-    function agregarNumero(numero) {
-      pantalla.value += numero;
-    }
+        // Función para agregar un número al display
+        function appendNumber(number) {
+            currentInput += number; // Agrega el número al final de la expresión
+            display.value = currentInput; // Actualiza el campo de texto con la expresión actual
+        }
 
-    function agregarOperador(operador) {
-      const ultimoCaracter = pantalla.value.slice(-1);
-      if ("+-*/".includes(ultimoCaracter)) {
-        pantalla.value = pantalla.value.slice(0, -1) + operador;
-      } else {
-        pantalla.value += operador;
-      }
-    }
+        // Función para agregar un operador a la expresión
+        function appendOperator(operator) {
+            if (currentInput !== '') { // Solo agrega el operador si hay algo en la entrada
+                currentInput += operator; // Agrega el operador
+                display.value = currentInput; // Actualiza el campo de texto con la expresión actual
+            }
+        }
 
-    function limpiarPantalla() {
-      pantalla.value = '';
-    }
+        // Función para limpiar la pantalla (resetear la expresión)
+        function clearDisplay() {
+            currentInput = ''; // Resetea la expresión
+            display.value = ''; // Limpia el campo de texto
+        }
 
-    function calcular() {
-      try {
-        pantalla.value = eval(pantalla.value);
-      } catch {
-        pantalla.value = 'Error';
-      }
-    }
-  </script>
+        // Función para calcular el resultado de la expresión
+        function calculate() {
+            try {
+                // Evalúa la expresión y la convierte a cadena
+                currentInput = eval(currentInput).toString();
+                display.value = currentInput; // Muestra el resultado en el campo de texto
+            } catch (e) {
+                // Si hay un error (por ejemplo, expresión inválida), muestra 'Error'
+                display.value = 'Error';
+                currentInput = ''; // Resetea la entrada
+            }
+        }
+    </script>
+
 </body>
 </html>
