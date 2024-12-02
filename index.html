@@ -1,166 +1,66 @@
-<html lang="es">
+<!DOCTYPE html>
+<html lang="en"> <!-- Declara que el documento usa HTML5 y está en inglés -->
 <head>
-    <!-- Define la codificación de caracteres como UTF-8 para que los caracteres especiales se muestren correctamente -->
-    <meta charset="UTF-8">
-    <!-- Hace que la página sea responsiva en dispositivos móviles -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Título de la página que aparece en la pestaña del navegador -->
-    <title>Calculadora</title>
-    <!-- Aquí va el bloque de estilos CSS -->
-    <style>
-        /* Estilos globales para el cuerpo de la página */
-        body {
-            font-family: Arial, sans-serif; /* Establece la fuente del texto */
-            display: flex; /* Usamos flexbox para centrar la calculadora */
-            justify-content: center; /* Centra horizontalmente */
-            align-items: center; /* Centra verticalmente */
-            height: 100vh; /* La altura de la página será el 100% de la ventana del navegador */
-            margin: 0; /* Elimina los márgenes por defecto del body */
-            background-color: #f4f4f9; /* Establece el color de fondo de la página */
-        }
-
-        /* Estilo del contenedor de la calculadora */
-        .calculator {
-            background-color: white; /* Fondo blanco para la calculadora */
-            padding: 20px; /* Espaciado interno de 20px */
-            border-radius: 10px; /* Bordes redondeados */
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil alrededor */
-        }
-
-        /* Estilo de la caja de texto que muestra los resultados */
-        .calculator input {
-            width: 200px; /* Ancho de la caja de texto */
-            height: 50px; /* Altura de la caja de texto */
-            font-size: 24px; /* Tamaño de la fuente dentro de la caja de texto */
-            text-align: right; /* Alinea el texto a la derecha */
-            margin-bottom: 10px; /* Espacio inferior */
-            padding: 10px; /* Espaciado dentro de la caja de texto */
-            border: 1px solid #ddd; /* Borde gris claro */
-            border-radius: 5px; /* Bordes redondeados */
-        }
-
-        /* Estilo de los botones de la calculadora */
-        .calculator button {
-            width: 45px; /* Ancho de cada botón */
-            height: 45px; /* Altura de cada botón */
-            font-size: 20px; /* Tamaño de la fuente en los botones */
-            margin: 5px; /* Espaciado entre los botones */
-            border: none; /* Sin borde alrededor del botón */
-            background-color: #f1f1f1; /* Color de fondo por defecto */
-            border-radius: 5px; /* Bordes redondeados */
-            cursor: pointer; /* El cursor cambia a una mano al pasar sobre el botón */
-            transition: background-color 0.3s; /* Transición suave para el cambio de color de fondo */
-        }
-
-        /* Efecto al pasar el ratón sobre los botones */
-        .calculator button:hover {
-            background-color: #ddd; /* Fondo gris al pasar el ratón */
-        }
-
-        /* Efecto cuando se hace clic en un botón */
-        .calculator button:active {
-            background-color: #ccc; /* Fondo más oscuro cuando se hace clic */
-        }
-
-        /* Estilo para los botones de los operadores */
-        .calculator .operator {
-            background-color: #ff9800; /* Fondo naranja para los operadores */
-            color: white; /* Texto en blanco */
-        }
-
-        /* Estilo para el botón de igual */
-        .calculator .equals {
-            background-color: #4caf50; /* Fondo verde para el botón de igual */
-            color: white; /* Texto en blanco */
-        }
-
-        /* Estilo para el botón de limpiar (C) */
-        .calculator .clear {
-            background-color: #f44336; /* Fondo rojo para el botón de limpiar */
-            color: white; /* Texto en blanco */
-        }
-    </style>
+    <meta charset="UTF-8"> <!-- Especifica el juego de caracteres UTF-8 para soporte internacional -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Configura la escala de la página para dispositivos móviles -->
+    <title>Calculadora Sin JavaScript</title> <!-- Título que aparece en la pestaña del navegador -->
 </head>
 <body>
+    <h1>Calculadora</h1> <!-- Encabezado principal de la página -->
 
-    <!-- Contenedor principal de la calculadora -->
-    <div class="calculator">
-        <!-- Campo de texto que muestra la operación actual y el resultado -->
-        <input type="text" id="display" disabled />
-        
-        <!-- Fila de botones (1) -->
-        <div>
-            <button onclick="appendNumber('7')">7</button>
-            <button onclick="appendNumber('8')">8</button>
-            <button onclick="appendNumber('9')">9</button>
-            <button onclick="appendOperator('+')" class="operator">+</button>
-        </div>
-        
-        <!-- Fila de botones (2) -->
-        <div>
-            <button onclick="appendNumber('4')">4</button>
-            <button onclick="appendNumber('5')">5</button>
-            <button onclick="appendNumber('6')">6</button>
-            <button onclick="appendOperator('-')" class="operator">-</button>
-        </div>
+    <!-- Formulario que contiene todos los botones y el campo de entrada -->
+    <form>
+        <!-- Campo de entrada donde se mostrará la operación y el resultado. Es de solo lectura. -->
+        <input type="text" name="calc" id="calc" readonly>
+        <br><br> <!-- Espaciado entre el campo de entrada y los botones -->
 
-        <!-- Fila de botones (3) -->
-        <div>
-            <button onclick="appendNumber('1')">1</button>
-            <button onclick="appendNumber('2')">2</button>
-            <button onclick="appendNumber('3')">3</button>
-            <button onclick="appendOperator('*')" class="operator">*</button>
-        </div>
+        <!-- Fila de botones para los números 7, 8, 9 y el operador de división -->
+        <button type="button" onclick="document.getElementById('calc').value += '7'">7</button>
+        <button type="button" onclick="document.getElementById('calc').value += '8'">8</button>
+        <button type="button" onclick="document.getElementById('calc').value += '9'">9</button>
+        <button type="button" onclick="document.getElementById('calc').value += '/'">/</button>
+        <br> <!-- Salto de línea para organizar los botones -->
 
-        <!-- Fila de botones (4) -->
-        <div>
-            <button onclick="appendNumber('0')">0</button>
-            <button onclick="clearDisplay()" class="clear">C</button>
-            <button onclick="calculate()" class="equals">=</button>
-            <button onclick="appendOperator('/')" class="operator">/</button>
-        </div>
-    </div>
+        <!-- Fila de botones para los números 4, 5, 6 y el operador de multiplicación -->
+        <button type="button" onclick="document.getElementById('calc').value += '4'">4</button>
+        <button type="button" onclick="document.getElementById('calc').value += '5'">5</button>
+        <button type="button" onclick="document.getElementById('calc').value += '6'">6</button>
+        <button type="button" onclick="document.getElementById('calc').value += '*'">*</button>
+        <br> <!-- Salto de línea -->
 
-    <!-- Aquí va el bloque de código JavaScript -->
+        <!-- Fila de botones para los números 1, 2, 3 y el operador de resta -->
+        <button type="button" onclick="document.getElementById('calc').value += '1'">1</button>
+        <button type="button" onclick="document.getElementById('calc').value += '2'">2</button>
+        <button type="button" onclick="document.getElementById('calc').value += '3'">3</button>
+        <button type="button" onclick="document.getElementById('calc').value += '-'">-</button>
+        <br> <!-- Salto de línea -->
+
+        <!-- Fila de botones para el número 0, punto decimal, igual y el operador de suma -->
+        <button type="button" onclick="document.getElementById('calc').value += '0'">0</button>
+        <button type="button" onclick="document.getElementById('calc').value += '.'">.</button>
+        <!-- El botón "=" llama a la función calcular() para realizar la operación -->
+        <button type="button" onclick="calcular()">=</button>
+        <button type="button" onclick="document.getElementById('calc').value += '+'">+</button>
+        <br><br> <!-- Espaciado adicional -->
+
+        <!-- Botón para limpiar el campo de entrada (borra todo el contenido) -->
+        <button type="button" onclick="document.getElementById('calc').value = ''">C</button>
+    </form>
+
+    <!-- Sección de JavaScript para realizar los cálculos -->
     <script>
-        // Obtener el campo de texto donde se muestra la operación y el resultado
-        let display = document.getElementById('display');
-        // Variable para almacenar la expresión matemática actual
-        let currentInput = '';
-
-        // Función para agregar un número al display
-        function appendNumber(number) {
-            currentInput += number; // Agrega el número al final de la expresión
-            display.value = currentInput; // Actualiza el campo de texto con la expresión actual
-        }
-
-        // Función para agregar un operador a la expresión
-        function appendOperator(operator) {
-            if (currentInput !== '') { // Solo agrega el operador si hay algo en la entrada
-                currentInput += operator; // Agrega el operador
-                display.value = currentInput; // Actualiza el campo de texto con la expresión actual
-            }
-        }
-
-        // Función para limpiar la pantalla (resetear la expresión)
-        function clearDisplay() {
-            currentInput = ''; // Resetea la expresión
-            display.value = ''; // Limpia el campo de texto
-        }
-
-        // Función para calcular el resultado de la expresión
-        function calculate() {
+        // Función calcular() que evalúa la operación ingresada en el campo de entrada
+        function calcular() {
             try {
-                // Evalúa la expresión y la convierte a cadena
-                currentInput = eval(currentInput).toString();
-                display.value = currentInput; // Muestra el resultado en el campo de texto
+                // Usa eval() para evaluar la expresión matemática dentro del campo de entrada
+                let resultado = eval(document.getElementById('calc').value);
+                // Muestra el resultado de la evaluación en el campo de entrada
+                document.getElementById('calc').value = resultado;
             } catch (e) {
-                // Si hay un error (por ejemplo, expresión inválida), muestra 'Error'
-                display.value = 'Error';
-                currentInput = ''; // Resetea la entrada
+                // Si hay un error (por ejemplo, una operación inválida), muestra "Error"
+                document.getElementById('calc').value = 'Error';
             }
         }
     </script>
-
 </body>
 </html>
