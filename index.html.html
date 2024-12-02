@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en"> <!-- Declara que el documento usa HTML5 y está en inglés -->
+<head>
+    <meta charset="UTF-8"> <!-- Especifica el juego de caracteres UTF-8 para soporte internacional -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Configura la escala de la página para dispositivos móviles -->
+    <title>Calculadora Sin JavaScript</title> <!-- Título que aparece en la pestaña del navegador -->
+</head>
+<body>
+    <h1>Calculadora</h1> <!-- Encabezado principal de la página -->
+
+    <!-- Formulario que contiene todos los botones y el campo de entrada -->
+    <form>
+        <!-- Campo de entrada donde se mostrará la operación y el resultado. Es de solo lectura. -->
+        <input type="text" name="calc" id="calc" readonly>
+        <br><br> <!-- Espaciado entre el campo de entrada y los botones -->
+
+        <!-- Fila de botones para los números 7, 8, 9 y el operador de división -->
+        <button type="button" onclick="document.getElementById('calc').value += '7'">7</button>
+        <button type="button" onclick="document.getElementById('calc').value += '8'">8</button>
+        <button type="button" onclick="document.getElementById('calc').value += '9'">9</button>
+        <button type="button" onclick="document.getElementById('calc').value += '/'">/</button>
+        <br> <!-- Salto de línea para organizar los botones -->
+
+        <!-- Fila de botones para los números 4, 5, 6 y el operador de multiplicación -->
+        <button type="button" onclick="document.getElementById('calc').value += '4'">4</button>
+        <button type="button" onclick="document.getElementById('calc').value += '5'">5</button>
+        <button type="button" onclick="document.getElementById('calc').value += '6'">6</button>
+        <button type="button" onclick="document.getElementById('calc').value += '*'">*</button>
+        <br> <!-- Salto de línea -->
+
+        <!-- Fila de botones para los números 1, 2, 3 y el operador de resta -->
+        <button type="button" onclick="document.getElementById('calc').value += '1'">1</button>
+        <button type="button" onclick="document.getElementById('calc').value += '2'">2</button>
+        <button type="button" onclick="document.getElementById('calc').value += '3'">3</button>
+        <button type="button" onclick="document.getElementById('calc').value += '-'">-</button>
+        <br> <!-- Salto de línea -->
+
+        <!-- Fila de botones para el número 0, punto decimal, igual y el operador de suma -->
+        <button type="button" onclick="document.getElementById('calc').value += '0'">0</button>
+        <button type="button" onclick="document.getElementById('calc').value += '.'">.</button>
+        <!-- El botón "=" llama a la función calcular() para realizar la operación -->
+        <button type="button" onclick="calcular()">=</button>
+        <button type="button" onclick="document.getElementById('calc').value += '+'">+</button>
+        <br><br> <!-- Espaciado adicional -->
+
+        <!-- Botón para limpiar el campo de entrada (borra todo el contenido) -->
+        <button type="button" onclick="document.getElementById('calc').value = ''">C</button>
+    </form>
+
+    <!-- Sección de JavaScript para realizar los cálculos -->
+    <script>
+        // Función calcular() que evalúa la operación ingresada en el campo de entrada
+        function calcular() {
+            try {
+                // Usa eval() para evaluar la expresión matemática dentro del campo de entrada
+                let resultado = eval(document.getElementById('calc').value);
+                // Muestra el resultado de la evaluación en el campo de entrada
+                document.getElementById('calc').value = resultado;
+            } catch (e) {
+                // Si hay un error (por ejemplo, una operación inválida), muestra "Error"
+                document.getElementById('calc').value = 'Error';
+            }
+        }
+    </script>
+</body>
+</html>
